@@ -9,7 +9,7 @@ List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getA
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"">
+<meta charset="UTF-8">
 <title>게시물 목록</title>
 </head>
 <body>
