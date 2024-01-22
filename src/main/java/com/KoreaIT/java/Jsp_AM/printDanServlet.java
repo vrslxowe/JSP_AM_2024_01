@@ -29,10 +29,10 @@ public class printDanServlet extends HttpServlet {
 		if (inputedColor == null) {
 			inputedColor = "black";
 		}
-
+		
 		int dan = Integer.parseInt(inputedDan);
 		int limit = Integer.parseInt(inputedLimit);
-
+		
 		response.getWriter().append(String.format("<div style=\"color:%s\";>==%d단==</div>", inputedColor, dan));
 
 		for (int i = 1; i <= limit; i++) {
