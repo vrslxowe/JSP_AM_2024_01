@@ -9,16 +9,12 @@ List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getA
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"">
 <title>게시물 목록</title>
 </head>
 <body>
 
-	<a href="https://www.naver.com" target="_blank">네이버</a>
-	<a href="http://localhost:8081/JSP_AM_2024_01/article/list"
-		target="_blank">버튼</a>
-	<a href="/JSP_AM_2024_01/article/list" target="_blank">버튼</a>
-	<a href="detail" target="_blank">디테일</a>
+	<a href="../home/main">메인으로 이동</a>
 
 	<h2>게시물 목록</h2>
 
