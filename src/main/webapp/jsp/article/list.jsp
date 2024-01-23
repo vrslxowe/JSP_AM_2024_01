@@ -11,7 +11,7 @@ int totalPage = (int) request.getAttribute("totalPage");
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"">
 <title>게시물 목록</title>
 </head>
 <body>
@@ -67,18 +67,26 @@ int totalPage = (int) request.getAttribute("totalPage");
 	text-decoration: underline;
 }
 </style>
-
 	<div class="page">
 		<%
+		if (cPage > 1) {
+		%>
+		<a href="list?page=1">◀◀</a>
+		<%
+		}
+
 		for (int i = 1; i <= totalPage; i++) {
 		%>
 		<a class="<%=cPage == i ? "cPage" : ""%>" href="list?page=<%=i%>"><%=i%></a>
 		<%
-		if (5 >= cPage){
-			}%><%
+		}
+
+		if (cPage < totalPage) {
+		%>
+		<a href="list?page=<%=totalPage%>">▶▶</a>
+		<%
 		}
 		%>
-		
 	</div>
 
 
