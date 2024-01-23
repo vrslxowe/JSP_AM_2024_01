@@ -8,7 +8,7 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"">
 <title>게시물 상세페이지</title>
 </head>
 <body>

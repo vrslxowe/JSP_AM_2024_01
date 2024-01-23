@@ -39,4 +39,14 @@
     <servlet-name>asdf</servlet-name>
     <url-pattern>/asdf</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ArticleDoModifyServlet</display-name>
+    <servlet-name>ArticleDoModifyServlet</servlet-name>
+    <servlet-class>com.KoreaIT.java.Jsp_AM.servlet.ArticleDoModifyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArticleDoModifyServlet</servlet-name>
+    <url-pattern>/ArticleDoModifyServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
