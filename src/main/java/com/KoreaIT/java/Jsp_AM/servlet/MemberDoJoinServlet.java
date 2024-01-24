@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.KoreaIT.java.Jsp_AM.config.Config;
 import com.KoreaIT.java.Jsp_AM.util.DBUtil;
 import com.KoreaIT.java.Jsp_AM.util.SecSql;
 
@@ -15,40 +14,42 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/article/doModify")
-public class ArticleDoModifyServlet extends HttpServlet {
+@WebServlet("/member/dojoin")
+public class MemberDoJoinServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		// DB연결
+		
+		
 		try {
-			Class.forName(Config.getDbDriverClassName());
+			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("클래스가 없습니다.");
 			e.printStackTrace();
 		}
 
+		String url = "jdbc:mysql://127.0.0.1:3306/JSP_AM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
+		String user = "root";
+		String password = "";
+
 		Connection conn = null;
 
 		try {
-			conn = DriverManager.getConnection(Config.getDbUrl(), Config.getDbUser(), Config.getDbPw());
+			conn = DriverManager.getConnection(url, user, password);
+			String loginId = null;
+			String loginPw = null;
+			String loginPwConfirm = null;
+			String name = null;
 
-			int id = Integer.parseInt(request.getParameter("id"));
+			SecSql sql = new SecSql();
+			sql.append("SELECT COUNT(*) > 0");
+			sql.append("FROM `member`");
+			sql.append("WHERE loginId = ?;", loginId);
 
-			String title = request.getParameter("title");
-			String body = request.getParameter("body");
-
-			SecSql sql = SecSql.from("UPDATE article");
-			sql.append("SET ");
-			sql.append("title = ?,", title);
-			sql.append("`body` = ?", body);
-			sql.append("WHERE id = ?;", id);
-
-			DBUtil.update(conn, sql);
-
-			response.getWriter().append(String
-					.format("<script>alert('%d번 글이 수정되었습니다.'); location.replace('detail?id=%d');</script>", id, id));
+			int id = DBUtil.insert(conn, sql);
+			boolean isLoginIdDup = DBUtil.selectRowBooleanValue(conn, sql);
 
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
