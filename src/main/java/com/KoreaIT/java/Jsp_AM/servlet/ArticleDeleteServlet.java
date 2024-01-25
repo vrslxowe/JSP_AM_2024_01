@@ -40,7 +40,7 @@ public class ArticleDeleteServlet extends HttpServlet {
 
 			SecSql sql = SecSql.from("DELETE");
 			sql.append("FROM article");
-			sql.append("WHERE i = ?;", id);
+			sql.append("WHERE id = ?;", id);
 
 			DBUtil.delete(conn, sql);
 
