@@ -25,7 +25,7 @@
 				alert('이미 처리중입니다');
 				return;
 			}
-// 			form.loginId.value = form.loginId.value.trim();
+			// 			form.loginId.value = form.loginId.value.trim();
 			var loginId = form.loginId.value.trim();
 			var loginPw = form.loginPw.value.trim();
 			var loginPwConfirm = form.loginPwConfirm.value.trim();
