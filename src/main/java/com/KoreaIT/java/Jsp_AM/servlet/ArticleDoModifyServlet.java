@@ -38,14 +38,27 @@ public class ArticleDoModifyServlet extends HttpServlet {
 			conn = DriverManager.getConnection(Config.getDbUrl(), Config.getDbUser(), Config.getDbPw());
 
 			int id = Integer.parseInt(request.getParameter("id"));
-			//현재로그인이되어있는사람의 아이디 번호와 글작성자의 아이디가 맞아야 수정할 수 있게
-			HttpSession session = request.getSession();
+
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
-			Map<String, Object> loginedMember = (Map<String, Object>) session.getAttribute("loginedMember");
+
+			HttpSession session = request.getSession();
+
 			int loginedMemberId = (int) session.getAttribute("loginedMemberId");
 
-			SecSql sql = SecSql.from("UPDATE article");
+			SecSql sql = SecSql.from("SELECT *");
+			sql.append("FROM article");
+			sql.append("WHERE id = ?;", id);
+
+			Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
+
+			if (loginedMemberId != (int) articleRow.get("memberId")) {
+				response.getWriter().append(
+						String.format("<script>alert('해당 글에 대한 권한이 없습니다.'); location.replace('list');</script>"));
+				return;
+			}
+
+			sql = SecSql.from("UPDATE article");
 			sql.append("SET ");
 			sql.append("title = ?,", title);
 			sql.append("`body` = ?", body);
