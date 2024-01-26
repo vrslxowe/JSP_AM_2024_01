@@ -47,12 +47,12 @@ public class ArticleDoWriteServlet extends HttpServlet {
 			sql.append("memberId = ?,", loginedMemberId);
 			sql.append("title = ?,", title);
 			sql.append("`body` = ?;", body);
-
+		
 			int id = DBUtil.insert(conn, sql);
-
+			
 			response.getWriter()
 					.append(String.format("<script>alert('%d번 글이 등록되었습니다.'); location.replace('list');</script>", id));
-
+			
 		} catch (SQLException e) {
 			System.out.println("에러 : " + e);
 		} catch (SQLErrorException e) {
